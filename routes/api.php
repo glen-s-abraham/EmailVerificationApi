@@ -14,6 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+
+Route::resource('user','User\UserController')->only(['store']);
+
+Route::get('email/verify/{id}','verification\VerificationController@verify')->name('verification.verify');
+
+Route::get('email/resend','verification\VerificationController@resend')->name('verification.resend');;
